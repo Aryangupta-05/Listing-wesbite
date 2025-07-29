@@ -1,0 +1,253 @@
+<%- layout('/layouts/boilerplate') -%>
+<style>
+    /* Reset and base styles */
+    .filter-container a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .filter-container {
+        margin: 1.5rem 0;
+    }
+
+    /* Main filter row */
+    .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    /* Filter option buttons - visible on larger screens */
+    .filter-options-row {
+        display: none; /* Hidden by default */
+    }
+
+    /* Filter option styling */
+    .filter-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        border-radius: 12px;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        min-width: 70px;
+        transition: all 0.2s ease;
+    }
+    .filter-option:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .filter-option i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+    }
+    .filter-option .text {
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
+    /* Tax switch styling */
+    .tax-switch {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        background: white;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .form-check-input {
+        width: 2.5em;
+        height: 1.5em;
+    }
+    .form-check-label {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    /* Dropdown styling - visible on smaller screens */
+    .filter-dropdown {
+        display: block; /* Visible by default */
+        flex-grow: 1;
+    }
+    .filter-dropdown .btn {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        background: white;
+        border: 1px solid #e9ecef;
+        color: #495057;
+        font-weight: 500;
+    }
+    .dropdown-menu {
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 0.5rem;
+    }
+    .dropdown-item {
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        margin: 0.15rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .dropdown-item i {
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Responsive behavior */
+    @media (min-width: 1065px) {
+        .filter-options-row {
+            display: flex; /* Show ALL filter options */
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .filter-dropdown {
+            display: none; /* Hide dropdown */
+        }
+        .tax-switch {
+            margin-left: auto;
+        }
+    }
+
+    @media (max-width: 1064px) {
+        .filter-options-row {
+            display: none; /* Hide filter options */
+        }
+        .filter-dropdown {
+            display: block; /* Show dropdown */
+        }
+    }
+
+    @media (max-width: 400px) {
+        .filter-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+        }
+        .tax-switch {
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="filter-container">
+    <div class="filter-row">
+        <!-- Dropdown for smaller screens -->
+        <div class="filter-dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter Categories
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/listings/filter?category=trending"><i class="fa-solid fa-fire"></i> Trending</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=rooms"><i class="fa-solid fa-bed"></i> Rooms</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=nature"><i class="fa-solid fa-leaf"></i> Nature</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=mountain"><i class="fa-solid fa-mountain-city"></i> Mountain</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=beach"><i class="fa-solid fa-umbrella-beach"></i> Beach</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=citylife"><i class="fa-solid fa-city"></i> CityLife</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=castle"><i class="fa-solid fa-chess-rook"></i> Castle</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=camping"><i class="fa-solid fa-campground"></i> Camping</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=farm"><i class="fa-solid fa-tractor"></i> Farm</a></li>
+                <li><a class="dropdown-item" href="/listings/filter?category=arctic"><i class="fa-solid fa-snowflake"></i> Arctic</a></li>
+            </ul>
+        </div>
+
+        <!-- Filter options row for larger screens - ALL OPTIONS INCLUDED -->
+        <div class="filter-options-row">
+            <a href="/listings/filter?category=trending" class="filter-option">
+                <i class="fa-solid fa-fire"></i>
+                <span class="text">Trending</span>
+            </a>
+            <a href="/listings/filter?category=rooms" class="filter-option">
+                <i class="fa-solid fa-bed"></i>
+                <span class="text">Rooms</span>
+            </a>
+            <a href="/listings/filter?category=nature" class="filter-option">
+                <i class="fa-solid fa-leaf"></i>
+                <span class="text">Nature</span>
+            </a>
+            <a href="/listings/filter?category=mountain" class="filter-option">
+                <i class="fa-solid fa-mountain-city"></i>
+                <span class="text">Mountain</span>
+            </a>
+            <a href="/listings/filter?category=beach" class="filter-option">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <span class="text">Beach</span>
+            </a>
+            <a href="/listings/filter?category=citylife" class="filter-option">
+                <i class="fa-solid fa-city"></i>
+                <span class="text">CityLife</span>
+            </a>
+            <a href="/listings/filter?category=castle" class="filter-option">
+                <i class="fa-solid fa-chess-rook"></i>
+                <span class="text">Castle</span>
+            </a>
+            <a href="/listings/filter?category=camping" class="filter-option">
+                <i class="fa-solid fa-campground"></i>
+                <span class="text">Camping</span>
+            </a>
+            <a href="/listings/filter?category=farm" class="filter-option">
+                <i class="fa-solid fa-tractor"></i>
+                <span class="text">Farm</span>
+            </a>
+            <a href="/listings/filter?category=arctic" class="filter-option">
+                <i class="fa-solid fa-snowflake"></i>
+                <span class="text">Arctic</span>
+            </a>
+        </div>
+
+        <!-- Tax switch -->
+        <div class="tax-switch">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            </div>
+            <label class="form-check-label" for="switchCheckDefault">Inc. Taxes</label>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+    <% for (let listing of data){ %>
+        <div class="col">
+            <a href="/listings/<%= listing._id %>" style="text-decoration: none; color: inherit;">
+                <div class="card index-listing-card">
+                    <img class="card-img-top" src="<%= listing.image.url %>" alt="<%= listing.title %>">
+                    <div class="card-body">
+                        <p class="card-text fw-bold">
+                            <%= listing.title %><br>
+                            <span>&#8377;<%= listing.price.toLocaleString("en-IN") %>/day</span>
+                            <i class="tax-info" style="display:none">&nbsp; &nbsp;+<%= listing.gst %>% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    const toggler = document.getElementById("switchCheckDefault");
+    toggler.addEventListener("click", () => {
+        let req = document.querySelectorAll(".tax-info");
+        for(items of req) {
+            if(toggler.checked) {
+                items.style.display = "inline";
+            } else {
+                items.style.display = "none";
+            }
+        }
+    });
+</script>
