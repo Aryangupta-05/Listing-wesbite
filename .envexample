@@ -1,0 +1,16 @@
+# Copy this file to `.env` and fill in real values.
+
+# MongoDB 
+# Example (MongoDB Atlas): mongodb+srv://<username>:<password>@<cluster>/<db>?retryWrites=true&w=majority
+ATLASDB_URL=
+
+# Session Secret (used for signing session cookies)
+SECRET=
+
+# Cloudinary credentials (used in cloudConfig.js)
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+
+# NODE_ENV can be 'development' or 'production'
+NODE_ENV=development
