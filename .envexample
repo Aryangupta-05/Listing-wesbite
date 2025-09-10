@@ -12,5 +12,5 @@ CLOUD_NAME=
 API_KEY=
 API_SECRET=
 
-# NODE_ENV can be 'development' or 'production'
+# NODE_ENV can be 'development' || 'production'
 NODE_ENV=development
